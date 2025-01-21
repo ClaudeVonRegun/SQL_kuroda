@@ -59,8 +59,8 @@ GROUP BY `tweet_id`
 HAVING reply_count = (
   SELECT MAX(cnt)
   FROM (SELECT count(*) AS cnt
-          FROM `replys`
-          GROUP BY `tweet_id`)counts
+        FROM `replys`
+        GROUP BY `tweet_id`)counts
 );
 
 -- 始めに思考した文。
@@ -117,10 +117,10 @@ ON users.id = replys.user_id
 GROUP BY replys.user_id
 HAVING max_reply_number = (
 	SELECT MAX(cnt) 
-	FROM(SELECT count(replys.id) AS cnt
-				FROM `replys`
-				GROUP BY replys.user_id
-			)count
+	FROM (SELECT count(replys.id) AS cnt
+        FROM `replys`
+        GROUP BY replys.user_id
+			 )count
 );
 
 -- 間違えて”最も多くのリプライを獲得したユーザーを探していたのでその記録も復習用に残す”
